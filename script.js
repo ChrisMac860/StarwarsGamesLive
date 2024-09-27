@@ -36,6 +36,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function setupEventListeners() {
+
+        document.querySelector('.closeNames').addEventListener('click', function() {
+            document.getElementById('namesModal').style.display = 'none';
+        });
         const giveUpButton = document.querySelector('button[name="giveUpButton"]');
         const guessButton = document.querySelector('button[name="guessButton"]');
         const namesButton = document.querySelector('button[name="namesButton"]');
