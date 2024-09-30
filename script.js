@@ -1,7 +1,3 @@
-
-
-
-
 document.addEventListener('DOMContentLoaded', function() {
     // characters array is now globally available from characters.js
     let currentCharacter = "";
