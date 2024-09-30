@@ -25,22 +25,35 @@ img {
     border-radius: 8px;
 }
 
-.small-donate-button {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: rgb(255, 165, 0); 
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 5px;
-    font-size: 12px;
-    cursor: pointer;
-    z-index: 1; /* Ensure it stays on top */
+.top-left-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 0;
+    padding: 0 75% 0% 0%;
 }
 
-.small-donate-button:hover {
-    background-color: rgb(255, 140, 0);
+/* Custom style for icon-only buttons (Help and Donate) */
+.icon-button {
+    background-color: black; /* Black box */
+    color: rgb(255, 221, 0); /* Yellow icons */
+    border: 2px solid rgb(255, 221, 0); /* Yellow border */
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 18px; /* Icon size */
+    cursor: pointer;
+    width: 40px;  /* Width for the black box */
+    height: 40px; /* Height for the black box */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.icon-button:hover {
+    background-color: rgb(255, 221, 0); /* Yellow background on hover */
+    color: black; /* Black icon on hover */
+    border-color: white;
 }
 
 title {
