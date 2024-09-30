@@ -25,6 +25,24 @@ img {
     border-radius: 8px;
 }
 
+.small-donate-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgb(255, 165, 0); 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    z-index: 1; /* Ensure it stays on top */
+}
+
+.small-donate-button:hover {
+    background-color: rgb(255, 140, 0);
+}
+
 title {
     font-size: 44px;
     line-height: 1.045em;
