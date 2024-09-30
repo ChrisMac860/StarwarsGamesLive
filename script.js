@@ -17,7 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const initialModal = document.getElementById("myModal");
         initialModal.style.display = "block";
         document.getElementById('resultModal').style.display = 'none';
-
+        document.getElementById('donateButton').addEventListener('click', function() {
+            window.open('https://www.paypal.com/donate/?hosted_button_id=VDAPRG9L44QH6'); // Replace with your actual PayPal button link
+        });
         document.querySelector('.close').addEventListener('click', () => {
             initialModal.style.display = "none";
         });
