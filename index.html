@@ -9,9 +9,9 @@
 </head>
 <body>
     <!-- Correct Answer / Give Up Modal -->
-    <div id="resultModal" class="modalh">
+    <div id="resultModal" class="modalh" style="display: none;">
         <div class="modal-content">
-            <span class="closeResult">&times;</span>
+            <span class="closeResult" >&times;</span>
             <div id="finalScore" class="score-display">0</div> <!-- Score display -->
             <h2 id="resultTitle">Game Over</h2>
             <p id="resultMessage">You gave up. The correct answer was XYZ.</p>
@@ -29,6 +29,17 @@
             </div>
         </div>
     </div>
+    <div id="helpModal" class="modalh" style="display:none;">
+        <div class="modal-content">
+          <span class="closeHelp">&times;</span>
+          <h2>How to Play</h2>
+          <p>
+            Guess the Star Wars character from the clues provided. Use the "Names" button for hints, or click "Give Up" to reveal the answer.
+            Earn points by guessing correctly and try to beat your high score!
+          </p>
+        </div>
+    </div>
+      
 
     <div id="myModal" class="modal">
         <!-- Modal content -->

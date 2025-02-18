@@ -22,7 +22,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 initialModal.style.display = "none";
             }
         });
+
+        // Help Modal Event Listeners
+        const helpButton = document.getElementById('helpButton');
+        const helpModal = document.getElementById('helpModal');
+        const closeHelp = document.querySelector('.closeHelp');
+        
+        helpButton.addEventListener('click', () => {
+            helpModal.style.display = 'block';
+        });
+        closeHelp.addEventListener('click', () => {
+            helpModal.style.display = 'none';
+        });
+        window.addEventListener('click', (event) => {
+            if (event.target === helpModal) helpModal.style.display = 'none';
+        });
+
     }
+    
 
     function initializeGame() {
         score = 0;
