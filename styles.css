@@ -27,8 +27,8 @@ img {
 
 .top-left-buttons {
     display: flex;
-    justify-content: center;
-    gap: 10px;
+    justify-content: left;
+    gap: 1%;
     margin: 0;
     padding: 0 75% 0% 0%;
 }
@@ -70,7 +70,11 @@ button {
     margin: 20px auto;
     max-width: 200px;
 }
-
+#helpButton {
+    display: block;
+    margin: 10%;
+    max-width: 200px;
+}
 .label-container {
     border: 1px solid #ccc;
     padding: 10px;
@@ -220,6 +224,10 @@ textarea {
     font-size: 28px;
     font-weight: bold;
     
+}
+
+button#donateButton {
+    margin: 1%;
 }
 
 .closeNames:hover,
