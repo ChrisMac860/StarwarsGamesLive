@@ -63,21 +63,38 @@
   <div id="myModal" class="modal">
     <!-- Modal content -->
     <div class="modal-content">
-      <span class="close">&times;</span>
+     
       <h2>Welcome to GuessWars!</h2>
       <p>Guess the Star Wars character from the clues.</p>
       <p>Stuck? Click "Names" for a hint or "Give Up" to see the answer.</p>
       <p>Ready? May the Force be with you!</p>
+      <div class="button-container">
+        <button id="quickPlayButton" class="button-style">Quick Play</button>
+        <button id="dailyChallengeButton" class="button-style">Daily Challenge</button>
+      </div>      
     </div>
   </div>
   <div class="main">
-    <div>
-      <div class="top-left-buttons">
-        <!-- Donate button removed from here -->
-        <button id="helpButton" class="icon-button"><i class="fas fa-question-circle"></i></button>
+    <div style="position: relative;">
+      <!-- Top left: Help button -->
+      <div class="top-left-buttons" style="position: absolute; top: 10px; left: 10px;">
+        <button id="helpButton" class="icon-button">
+          <i class="fas fa-question-circle"></i>
+        </button>
       </div>
-      <img src="logo.png" alt="gameLogo" class="logo">
+    
+      <!-- Top right: Mode indicator -->
+      <div id="modeIndicator" class="top-right-indicator" 
+           style="position: absolute; top: 10px; right: 10px; color: rgb(255,221,0); font-family: 'Roboto', sans-serif; font-size: 16px;">
+        Quick Play
+      </div>
+    
+      <!-- Center: Logo -->
+      <div style="text-align: center;">
+        <img src="logo.png" alt="gameLogo" class="logo">
+      </div>
     </div>
+    
     <div>
       <textarea name="guessBox" id="guessBox" cols="30" rows="1" maxlength="50"></textarea>
     </div>

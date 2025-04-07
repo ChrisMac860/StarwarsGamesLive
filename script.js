@@ -2,6 +2,22 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentCharacter = "";
     let score = 0;
 
+    function getDayOfYear() {
+        const now = new Date();
+        const start = new Date(now.getFullYear(), 0, 0);
+        const diff = now - start;
+        const oneDay = 1000 * 60 * 60 * 24;
+        return Math.floor(diff / oneDay);
+    }
+      
+    // Selects the daily character based on the day-of-year
+    function selectDailyCharacter() {
+    const day = getDayOfYear();
+    currentCharacter = characters[day % characters.length];
+    clearClues();
+    document.getElementById('guessBox').value = '';
+    }
+
     const charactersList = getCharacters();
 
 
@@ -44,9 +60,9 @@ document.addEventListener('DOMContentLoaded', function() {
         initialModal.style.display = "block";
 
         // Close button behavior
-        document.querySelector('.close').addEventListener('click', () => {
+      /*  document.querySelector('.close').addEventListener('click', () => {
             initialModal.style.display = "none";
-        });
+        });*/
 
         // Close modal when clicking outside of it
         window.addEventListener('click', (event) => {
@@ -72,12 +88,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
     }
     
+    let currentMode = "quick";
 
-    function initializeGame() {
+    function initializeGame(mode = "quick") {
+        currentMode = mode; // update the mode variable
+        score = 0;
+        setupEventListeners();
+        
+        // Update the indicator text:
+        document.getElementById('modeIndicator').textContent = 
+          mode === "daily" ? "Daily Challenge" : "Quick Play";
+        
+        if (mode === "daily") {
+          selectDailyCharacter();
+        } else {
+          selectNewCharacter();
+        }
+    }
+      
+      
+    /*function initializeGame() {
         score = 0;
         setupEventListeners();
         selectNewCharacter();
-    }
+    }*/
 
     function setupEventListeners() {
         document.querySelector('.closeNames').addEventListener('click', function() {
@@ -92,6 +126,18 @@ document.addEventListener('DOMContentLoaded', function() {
         giveUpButton.addEventListener('click', handleGiveUp);
         namesButton.addEventListener('click', handleNames);
         playAgainButton.addEventListener('click', handlePlayAgain);
+
+        document.getElementById('quickPlayButton').addEventListener('click', () => {
+            initializeGame("quick"); // Start quick play mode
+            document.getElementById('myModal').style.display = 'none'; // Hide the modal
+        });
+          
+        document.getElementById('dailyChallengeButton').addEventListener('click', () => {
+            initializeGame("daily"); // Start daily challenge mode
+            document.getElementById('myModal').style.display = 'none'; // Hide the modal
+        });
+          
+          
         
     }
 
@@ -140,9 +186,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function handlePlayAgain() {
-        document.getElementById('resultModal').style.display = 'none'; // Hide the result modal
-        score = 0; // Reset score
-        selectNewCharacter();
+        document.getElementById('resultModal').style.display = 'none';
+        score = 0;
+        if (currentMode === "daily") {
+          // Force switch to Quick Play mode after a daily challenge
+          initializeGame("quick");
+        } else {
+          // Otherwise, just restart Quick Play as normal
+          initializeGame("quick");
+        }
     }
 
     function handleNames() {
