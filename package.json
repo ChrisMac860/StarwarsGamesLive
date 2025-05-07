@@ -1,5 +1,11 @@
 {
   "dependencies": {
     "@vercel/analytics": "^1.5.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:unit": "jest tests/characterMatching.test.js tests/gameRound.test.js",
+    "test:ui": "playwright test tests/ui.test.js",
+    "test:watch": "jest --watch"
   }
 }

@@ -1,5 +1,58 @@
 document.addEventListener('DOMContentLoaded', function() {
     let currentCharacter = "";
+
+// Testable functions for game logic
+function matchCharacter(guess, characters) {
+    return characters.some(character => 
+        character.name.toLowerCase().includes(guess.toLowerCase())
+    );
+}
+
+function generateClues(character) {
+    return [
+        character.species,
+        character.homeworld
+    ];
+}
+
+function startGame(characters) {
+    const currentCharacter = selectDailyCharacter(characters);
+    return {
+        currentCharacter,
+        score: 0,
+        attemptsLeft: 6
+    };
+}
+
+function getCurrentCharacter(gameState) {
+    return gameState.currentCharacter;
+}
+
+function submitGuess(gameState, guess, characters) {
+    const isCorrect = matchCharacter(guess, [gameState.currentCharacter]);
+    
+    if (isCorrect) {
+        gameState.score += 10;
+    } else {
+        gameState.attemptsLeft -= 1;
+    }
+
+    return {
+        isCorrect,
+        score: gameState.score
+    };
+}
+
+// Export for testing
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        matchCharacter,
+        generateClues,
+        startGame,
+        getCurrentCharacter,
+        submitGuess
+    };
+}
     let score = 0;
 
     function getDayOfYear() {
@@ -182,7 +235,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function handleGiveUp() {
-        showResultModal(`You gave up. The correct answer was ${currentCharacter.name}.`);
+        const resultModal = document.getElementById('resultModal');
+        const resultTitle = document.getElementById('resultTitle');
+        const resultMessage = document.getElementById('resultMessage');
+        const finalScore = document.getElementById('finalScore');
+
+        resultTitle.textContent = 'Game Over';
+        resultMessage.textContent = `The character was ${currentCharacter.name}.`;
+        finalScore.style.display = 'none'; // Hide score
+        resultModal.style.display = 'block';
     }
 
     function handlePlayAgain() {
@@ -208,15 +269,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function showResultModal(message) {
         const resultModal = document.getElementById('resultModal');
-        document.getElementById('resultMessage').textContent = message;
-        document.getElementById('finalScore').textContent = score;
+        const resultMessage = document.getElementById('resultMessage');
+        const finalScore = document.getElementById('finalScore');
+        const resultTitle = document.getElementById('resultTitle');
+
+        resultMessage.textContent = message;
+        finalScore.textContent = score;
         resultModal.style.display = 'block';
 
-        // Setup behavior for closing the result modal
-        document.querySelector('.closeResult').addEventListener('click', () => resultModal.style.display = "none");
-        window.addEventListener('click', (event) => {
-            if (event.target === resultModal) resultModal.style.display = "none";
-        });
+        // Only show score for correct guesses
+        if (message.includes('Correct')) {
+            finalScore.style.display = 'block';
+        } else {
+            finalScore.style.display = 'none';
+        }
     }
 
     function animateIncorrectGuess() {
