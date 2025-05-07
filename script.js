@@ -110,12 +110,7 @@ if (typeof module !== 'undefined' && module.exports) {
         const initialModal = document.getElementById("myModal");
 
         // Show the welcome modal initially
-        initialModal.style.display = "block";
-
-        // Close button behavior
-      /*  document.querySelector('.close').addEventListener('click', () => {
-            initialModal.style.display = "none";
-        });*/
+        initialModal.style.display = "flex";
 
         // Close modal when clicking outside of it
         window.addEventListener('click', (event) => {
@@ -130,7 +125,7 @@ if (typeof module !== 'undefined' && module.exports) {
         const closeHelp = document.querySelector('.closeHelp');
         
         helpButton.addEventListener('click', () => {
-            helpModal.style.display = 'block';
+            helpModal.style.display = 'flex';
         });
         closeHelp.addEventListener('click', () => {
             helpModal.style.display = 'none';
@@ -139,6 +134,16 @@ if (typeof module !== 'undefined' && module.exports) {
             if (event.target === helpModal) helpModal.style.display = 'none';
         });
 
+        // Ensure close buttons work
+        const modalCloseButtons = document.querySelectorAll('.close, .closeResult, .closeNames');
+        modalCloseButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const parentModal = button.closest('.modal');
+                if (parentModal) {
+                    parentModal.style.display = 'none';
+                }
+            });
+        });
     }
     
     let currentMode = "quick";
@@ -243,7 +248,7 @@ if (typeof module !== 'undefined' && module.exports) {
         resultTitle.textContent = 'Game Over';
         resultMessage.textContent = `The character was ${currentCharacter.name}.`;
         finalScore.style.display = 'none'; // Hide score
-        resultModal.style.display = 'block';
+        resultModal.style.display = 'flex';
     }
 
     function handlePlayAgain() {
@@ -275,7 +280,7 @@ if (typeof module !== 'undefined' && module.exports) {
 
         resultMessage.textContent = message;
         finalScore.textContent = score;
-        resultModal.style.display = 'block';
+        resultModal.style.display = 'flex';
 
         // Only show score for correct guesses
         if (message.includes('Correct')) {
@@ -283,6 +288,21 @@ if (typeof module !== 'undefined' && module.exports) {
         } else {
             finalScore.style.display = 'none';
         }
+
+        // Ensure modal can be closed by clicking outside or on close button
+        const closeButtons = resultModal.querySelectorAll('.closeResult');
+        closeButtons.forEach(button => {
+            button.onclick = () => {
+                resultModal.style.display = 'none';
+            };
+        });
+
+        // Close modal when clicking outside
+        resultModal.onclick = (event) => {
+            if (event.target === resultModal) {
+                resultModal.style.display = 'none';
+            }
+        };
     }
 
     function animateIncorrectGuess() {
